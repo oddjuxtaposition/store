@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128182646) do
+ActiveRecord::Schema.define(version: 20160128190630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,4 +108,45 @@ ActiveRecord::Schema.define(version: 20160128182646) do
   add_foreign_key "product_categorizations", "categories"
   add_foreign_key "product_categorizations", "products"
   add_foreign_key "shipments", "orders"
+
+  create_view :product_listings,  sql_definition: <<-SQL
+      WITH listings AS (
+           SELECT products.id,
+              products.name,
+              products.description,
+              products.price,
+              products."position",
+              products.created_at,
+              products.updated_at,
+              categories.name AS category
+             FROM ((product_categorizations pc
+               LEFT JOIN products ON ((products.id = pc.product_id)))
+               LEFT JOIN categories ON ((pc.category_id = categories.id)))
+          UNION
+           SELECT products.id,
+              products.name,
+              products.description,
+              products.price,
+              products."position",
+              products.created_at,
+              products.updated_at,
+              NULL::character varying AS category
+             FROM products
+          )
+   SELECT listings.id,
+      listings.name,
+      listings.description,
+      listings.price,
+      listings.category,
+          CASE inventories.available
+              WHEN NULL::integer THEN false
+              ELSE (sum(inventories.available) <= sum(order_items.id))
+          END AS sold_out
+     FROM (((listings
+       LEFT JOIN inventories ON ((inventories.product_id = listings.id)))
+       LEFT JOIN order_items ON ((order_items.product_id = listings.id)))
+       LEFT JOIN transitions ON (((transitions.stateful_id = order_items.id) AND ((transitions.stateful_type)::text = 'Order::Item'::text))))
+    GROUP BY listings.id, listings.category, listings.name, listings.description, listings.price, inventories.available, listings."position"
+    ORDER BY listings."position";
+  SQL
 end
