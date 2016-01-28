@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128182415) do
+ActiveRecord::Schema.define(version: 20160128182646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,13 +41,15 @@ ActiveRecord::Schema.define(version: 20160128182415) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.money    "price",      scale: 2
+    t.money    "price",       scale: 2
     t.integer  "order_id"
     t.integer  "product_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "shipment_id"
     t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
     t.index ["product_id"], name: "index_order_items_on_product_id", using: :btree
+    t.index ["shipment_id"], name: "index_order_items_on_shipment_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -80,6 +82,13 @@ ActiveRecord::Schema.define(version: 20160128182415) do
     t.datetime "updated_at",            null: false
   end
 
+  create_table "shipments", force: :cascade do |t|
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_shipments_on_order_id", using: :btree
+  end
+
   create_table "transitions", force: :cascade do |t|
     t.string   "to_state"
     t.json     "metadata"
@@ -95,6 +104,8 @@ ActiveRecord::Schema.define(version: 20160128182415) do
   add_foreign_key "order_item_price_change_notifications", "order_items"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
+  add_foreign_key "order_items", "shipments"
   add_foreign_key "product_categorizations", "categories"
   add_foreign_key "product_categorizations", "products"
+  add_foreign_key "shipments", "orders"
 end
