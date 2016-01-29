@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128190630) do
+ActiveRecord::Schema.define(version: 20160128224636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,14 @@ ActiveRecord::Schema.define(version: 20160128190630) do
   add_foreign_key "product_categorizations", "categories"
   add_foreign_key "product_categorizations", "products"
   add_foreign_key "shipments", "orders"
+
+  create_view :category_listings,  sql_definition: <<-SQL
+      SELECT categories.name
+     FROM categories
+    WHERE (EXISTS ( SELECT 1
+             FROM product_listings p
+            WHERE ((p.category)::text = (categories.name)::text)));
+  SQL
 
   create_view :product_listings,  sql_definition: <<-SQL
       WITH listings AS (

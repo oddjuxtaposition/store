@@ -1,0 +1,8 @@
+%h1= @product.name
+%h2= number_to_currency @product.price
+
+= image_tag 'demo/koala.jpg'
+
+= button_to store_add_to_cart_path do
+  Add to Cart
+

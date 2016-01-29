@@ -1,0 +1,8 @@
+%div[product]
+  = link_to [:store, product.becomes(Product::Listing)] do
+    = image_tag 'demo/koala.jpg', size: '200x200'
+  = product.name
+  %br
+  = number_to_currency product.price
+
+

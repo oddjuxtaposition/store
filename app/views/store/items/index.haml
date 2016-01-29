@@ -1,0 +1,4 @@
+- current_cart.items.group_by(&:product).each do |product, items|
+  %h1= pluralize items.count, product.name
+  = render product
+

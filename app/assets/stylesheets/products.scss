@@ -1,0 +1,46 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.products.show {
+  h2 {
+    color: #555;
+    font: {
+      size: 1.2em;
+      weight: normal;
+    }
+    margin-top: -0.2em;
+    text-align: center;
+  }
+}
+
+.product, .product__listing {
+  float: left;
+  margin: 0 4% 4% 0;
+  max-width: 29%;
+  text-align: center;
+
+  a {
+    display: block;
+    position: relative;
+
+    &:before {
+      content: '\A';
+      display: block;
+      position: relative;
+      transition: all 0.15s ease;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      z-index: 2;
+    }
+  }
+
+  &:hover a:before {
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+

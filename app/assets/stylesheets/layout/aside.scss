@@ -1,0 +1,33 @@
+@import '../variables';
+
+aside {
+  border-left: solid #222 1px;
+  color: #828282;
+  font-family: 'Vollkorn', 'Times', 'Times New Roman';
+  left: 50%;
+  margin: 0 0 3em 13em;
+  min-height: 100%;
+  padding: 9em 0 2em 2em;
+  position: absolute;
+  top: 3em;
+  width: 17em;
+
+  strong {
+    color: #4e755e;
+    display: block;
+    padding-top: 1em;
+  }
+
+  h2 {
+    border-top: solid #222 1px;
+    color: #4e755e;
+    margin-top: 1.5em;
+    padding: 1em 0.4em;
+    text-transform: lowercase;
+  }
+
+  ul li a {
+    color: #838383;
+  }
+}
+

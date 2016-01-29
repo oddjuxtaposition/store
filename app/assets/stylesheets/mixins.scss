@@ -1,0 +1,117 @@
+@mixin animated-modal-background-gradient($time, $pct, $delay: 0s) {
+  -webkit-animation: AnimateModalBackgroundGradient $time ease,
+                     FadeIn $time ease $delay forwards;
+  -moz-animation: AnimateModalBackgroundGradient $time ease,
+                  FadeIn $time ease $delay forwards;
+  animation: AnimateModalBackgroundGradient $time ease,
+             FadeIn $time ease $delay forwards;
+
+  @-webkit-keyframes AnimateModalBackgroundGradient {
+    0%{   -webkit-transform: translate3d($pct, 0, 0) }
+    50%{  -webkit-transform: translate3d($pct/2, 0, 0) }
+    100%{ -webkit-transform: translate3d(0, 0, 0)  }
+  }
+  @-moz-keyframes AnimateModalBackgroundGradient {
+    0%{   -webkit-transform: translate3d($pct, 0, 0) }
+    50%{  -webkit-transform: translate3d($pct/2, 0, 0) }
+    100%{ -webkit-transform: translate3d(0, 0, 0)  }
+  }
+  @keyframes AnimateModalBackgroundGradient {
+    0%{   -webkit-transform: translate3d($pct, 0, 0) }
+    50%{  -webkit-transform: translate3d($pct/2, 0, 0) }
+    100%{ -webkit-transform: translate3d(0, 0, 0)  }
+  }
+}
+
+@mixin block($text-align: left) {
+  background: rgba(250, 250, 250, 1);
+  color: #555;
+  line-height: 1.5em;
+  padding: 1em 2em 6em;
+  text: {
+    align: $text-align;
+    shadow: 0 0 1px #ddd;
+  }
+}
+
+@mixin columned-block {
+  background: rgba(250, 250, 250, 1);
+  border-top: solid #DDD 1px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  line-height: 1.5em;
+  margin: 0;
+  padding: 4em;
+  position: relative;
+
+
+  div {
+    flex: 0 1 17em;
+    margin: 2em;
+  }
+
+  h2 {
+    font-size: 3em;
+    left: 0;
+    line-height: 1em;
+    margin: 0 auto;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+    top: 1.5em;
+    width: 100%;
+  }
+
+  h3 {
+    font-size: 1em;
+    margin-top: 2em;
+  }
+
+  strong {
+    font-weight: 300;
+  }
+
+  ul {
+    margin-left: 1.3em;
+    padding-left: 0;
+  }
+}
+
+@mixin cover($background, $z-index: -1) {
+  background: $background;
+  background-size: cover;
+  content: ' ';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: $z-index;
+
+  -webkit-transform: translate3d(0, 0, 0); // warp speed
+}
+
+@mixin fade-in($time: 0.4s, $delay: 0s) {
+  display: block;
+  opacity: 0;
+
+  -webkit-animation: FadeIn $time ease $delay forwards;
+  -moz-animation: FadeIn $time ease $delay forwards;
+  animation: FadeIn $time ease $delay forwards;
+}
+
+@-webkit-keyframes FadeIn {
+  0%{   opacity: 0; }
+  100%{ opacity: 1;  }
+}
+@-moz-keyframes FadeIn {
+  0%{   opacity: 0; }
+  100%{ opacity: 1;  }
+}
+@keyframes FadeIn {
+  0%{   opacity: 0; }
+  100%{ opacity: 1;  }
+}
+

@@ -1,0 +1,124 @@
+@import "bourbon", "variables", "mixins", "fonts";
+
+html {
+  height: 100%;
+}
+
+body, textarea, input, select, option {
+  font: {
+    family: $font-primary-typeface;
+    weight: $font-primary-weight;
+  }
+  letter-spacing: $font-letter-spacing;
+  line-height: $font-line-height;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: #f9f9f9;
+  border-top: solid $body-top-border-color 12px;
+  color: #333;
+  padding-top: 2.45em; // room for the nav, here
+}
+
+a, a:link, a:visited, a:hover, a:active, a:focus {
+  color: inherit;
+  outline: 0;
+  text-decoration: none;
+  transition: background 0.1s ease-in, border 0.1s ease-in, color 0.1s ease-in;
+
+  &:hover, &:active, &:focus {
+    i {
+      opacity: 1;
+    }
+  }
+
+  i {
+    margin: 0.4em;
+    opacity: 0.5;
+    transition: opacity 0.1s ease-in;
+  }
+}
+
+header {
+  background: asset-url('header.png') 96.5% center no-repeat;
+  height: 8em;
+  margin: auto;
+  text-indent: -10000px;
+  width: 70em;
+
+  a {
+    display: block;
+    height: 100%;
+    position: relative;
+    z-index: 100;
+  }
+}
+
+nav {
+  border-top: solid #222 1px;
+  font-family: 'Vollkorn', 'Times', 'Times New Roman';
+  font-weight: 400;
+  margin: auto;
+  padding: 1em;
+  width: 60em;
+
+  a {
+    border-right: solid #676767 1px;
+    padding: 0 1.3em;
+    text-transform: lowercase;
+
+    &:first-of-type {
+      color: #b185a9;
+    }
+
+    &:nth-child(2) {
+      color: #a54648;
+    }
+
+    &:nth-child(3) {
+      color: #853d70;
+    }
+
+    &:nth-child(4) {
+      color: #4e755e;
+    }
+
+    &:last-of-type {
+      border-right: none;
+      color: #485283;
+    }
+  }
+}
+
+#content {
+  border-right: solid #222 1px;
+  left: 50%;
+  margin: 0 0 3em -30em;
+  padding: 0 1.5em;
+  overflow: visible;
+  position: relative;
+  width: 40em;
+
+  img {
+    position: relative;
+    max-width: 100%;
+  }
+}
+
+h1 {
+  color: #696969;
+  font: {
+    family: 'Dancing Script', cursive;
+    size: 2.5em;
+    weight: 300;
+  }
+  margin-top: 1em;
+  text-align: center;
+}
+
+article {
+  border-bottom: solid #222 1px;
+}
+

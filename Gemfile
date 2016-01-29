@@ -1,11 +1,16 @@
 source 'https://rubygems.org'
 
+gem 'bourbon'
 gem 'coffee-rails', '~> 4.1.0'
+gem 'haml'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
+gem 'normalize-rails', git: 'git@github.com:twobyfourio/normalize-rails.git'
 gem 'pg'
 gem 'puma'
+gem 'puma_worker_killer'
 gem 'rails', '>= 5.0.0.beta1', '< 5.1'
+gem 'sassc-rails'
 gem 'scenic'
 gem 'statesman'
 gem 'stripe'
@@ -18,6 +23,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'faker'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
